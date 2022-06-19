@@ -31,7 +31,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	 * @param callbackInfo Mixin {@linkplain CallbackInfo}
 	 *
 	 * @see PlayerEntity#travel(Vector3d)
-	 * @see LivingEntity#livingTick()
+	 * @see LivingEntity#aiStep()
 	 */
 	@Inject(method = "travel", at = @At("HEAD"), cancellable = true)
 	public void _flightcore_travel(Vector3d travelVector, CallbackInfo callbackInfo) {

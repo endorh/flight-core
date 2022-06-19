@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Injects {@link RemotePlayerEntityTravelEvent} on
- * {@link RemoteClientPlayerEntity#livingTick}
+ * {@link RemoteClientPlayerEntity#aiStep()}
  */
 @Mixin(RemoteClientPlayerEntity.class)
 public class RemoteClientPlayerEntityMixin extends AbstractClientPlayerEntity {
@@ -30,14 +30,14 @@ public class RemoteClientPlayerEntityMixin extends AbstractClientPlayerEntity {
 	
 	/**
 	 * Inject {@link RemotePlayerEntityTravelEvent} on
-	 * {@link RemoteClientPlayerEntity#livingTick}.
+	 * {@link RemoteClientPlayerEntity#aiStep()}.
 	 * @param callbackInfo Mixin {@link CallbackInfo}
 	 */
 	@Inject(
-	  method = "livingTick",
+	  method = "aiStep",
 	  at = @At(
 	    value = "INVOKE_STRING", args = "ldc=push",
-	    target = "Lnet/minecraft/profiler/IProfiler;startSection(Ljava/lang/String;)V"))
+	    target = "Lnet/minecraft/profiler/IProfiler;push(Ljava/lang/String;)V"))
 	protected void _flightcore_livingTick(CallbackInfo callbackInfo) {
 		MinecraftForge.EVENT_BUS.post(new RemotePlayerEntityTravelEvent(this));
 	}

@@ -13,8 +13,8 @@ import net.minecraftforge.eventbus.api.Event;
  * The event is cancellable. If cancelled, the default rotation
  * behaviour won't take place.
  *
- * @see PlayerEntity#rotateTowards(double, double)
- * @see MouseHelper#updatePlayerLook()
+ * @see PlayerEntity#turn(double, double)
+ * @see MouseHelper#turnPlayer()
  */
 @Cancelable
 public class PlayerEntityRotateEvent extends Event {
@@ -26,16 +26,16 @@ public class PlayerEntityRotateEvent extends Event {
 	 * Accumulated mouse input on the x axis for this frame. Usually
 	 * scaled down multiplying by 0.15D
 	 *
-	 * @see PlayerEntity#rotateTowards(double, double)
-	 * @see MouseHelper#updatePlayerLook()
+	 * @see PlayerEntity#turn(double, double)
+	 * @see MouseHelper#turnPlayer()
 	 */
 	public final double x;
 	/**
 	 * Accumulated mouse input on the y axis for this frame. Usually
 	 * scaled down multiplying by 0.15D
 	 *
-	 * @see PlayerEntity#rotateTowards(double, double)
-	 * @see MouseHelper#updatePlayerLook()
+	 * @see PlayerEntity#turn(double, double)
+	 * @see MouseHelper#turnPlayer()
 	 */
 	public final double y;
 	

@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.model.PlayerModel;
 import java.util.function.Consumer;
 
 /**
- * Generates on every call to {@link PlayerRenderer#applyRotations},
+ * Generates on every call to {@link PlayerRenderer#setupRotations},
  * when the rotations applied to the {@link PlayerModel} are performed.
  * The event is cancellable. If cancelled, the default rotation
  * behaviour won't take place.

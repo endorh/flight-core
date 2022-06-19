@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Injects {@link ApplyRotationsRenderPlayerEvent} on
- * {@link PlayerRenderer#applyRotations}
+ * {@link PlayerRenderer#setupRotations}
  */
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerRendererMixin
@@ -33,7 +33,7 @@ public abstract class PlayerRendererMixin
 	
 	/**
 	 * Inject {@link ApplyRotationsRenderPlayerEvent} on
-	 * {@link PlayerRenderer#applyRotations}. The event is cancellable.
+	 * {@link PlayerRenderer#setupRotations}. The event is cancellable.
 	 * If cancelled, the {@code applyRotations} method call will be
 	 * skipped. The super method call can be invoked through the
 	 * provided lambda.
@@ -44,7 +44,7 @@ public abstract class PlayerRendererMixin
 	 * @param partialTicks Interpolation progress between this tick and the next for this frame
 	 * @param callbackInfo Mixin {@link CallbackInfo}
 	 */
-	@Inject(method = "applyRotations*", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "setupRotations*", at = @At("HEAD"), cancellable = true)
 	protected void _flightcore_applyRotations(
 	  AbstractClientPlayerEntity player, MatrixStack mStack,
 	  float ageInTicks, float rotationYaw, float partialTicks,
@@ -56,8 +56,8 @@ public abstract class PlayerRendererMixin
 		    (PlayerRenderer)(LivingRenderer<AbstractClientPlayerEntity,
 		    PlayerModel<AbstractClientPlayerEntity>>)this,
 		    player, mStack, ageInTicks, rotationYaw, partialTicks,
-		    (vec) -> super.applyRotations(
-		      player, mStack, vec.getX(), vec.getY(), vec.getZ()));
+		    (vec) -> super.setupRotations(
+		      player, mStack, vec.x(), vec.y(), vec.z()));
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled()) callbackInfo.cancel();
 	}

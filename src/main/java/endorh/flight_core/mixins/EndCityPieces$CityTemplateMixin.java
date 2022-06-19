@@ -32,8 +32,7 @@ public abstract class EndCityPieces$CityTemplateMixin {
 	/**
 	 * Shadow field containing the rotation of the end ship
 	 */
-	@Shadow(aliases = "rotation")
-	private @Final Rotation rotation;
+	@Shadow(aliases = "rotation") private @Final Rotation rotation;
 	
 	/**
 	 * Inject {@link GenerateEndShipItemFrameEvent} on
@@ -50,7 +49,7 @@ public abstract class EndCityPieces$CityTemplateMixin {
 	 * default behaviour is prevented, and an item frame with the item stack
 	 * set by the event is added.<br>
 	 *
-	 * @param function Data marker
+	 * @param marker Data marker
 	 * @param pos Block position of the marker
 	 * @param world Server world where the structure is loaded
 	 * @param rand Generation {@link Random} object
@@ -59,11 +58,11 @@ public abstract class EndCityPieces$CityTemplateMixin {
 	 */
 	@Inject(method = "handleDataMarker", at = @At("HEAD"), cancellable = true)
 	protected void _flightcore_handleDataMarker(
-	  String function, BlockPos pos, IServerWorld world, Random rand,
+	  String marker, BlockPos pos, IServerWorld world, Random rand,
 	  MutableBoundingBox sbb, CallbackInfo callbackInfo
 	) {
-		if (function.startsWith("Elytra")) {
-			final ServerWorld serverWorld = world.getWorld();
+		if (marker.startsWith("Elytra")) {
+			ServerWorld serverWorld = world.getLevel();
 			ItemFrameEntity itemFrame = new ItemFrameEntity(
 			  serverWorld, pos, this.rotation.rotate(Direction.SOUTH));
 			ItemStack elytraStack = new ItemStack(Items.ELYTRA);
@@ -76,8 +75,8 @@ public abstract class EndCityPieces$CityTemplateMixin {
 				callbackInfo.cancel();
 			} else if (event.getResult() == DENY) {
 				callbackInfo.cancel();
-				itemFrame.setDisplayedItemWithUpdate(event.getElytraStack(), false);
-				world.addEntity(itemFrame);
+				itemFrame.setItem(event.getElytraStack(), false);
+				world.addFreshEntity(itemFrame);
 			}
 		}
 	}

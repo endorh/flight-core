@@ -14,7 +14,8 @@ public class FailedMixinLogger {
 		if (!logServerPlayNetHandler$shouldDisableElytraCheck) {
 			LOGGER.warn("Mixin ServerPlayNetHandler$shouldDisableElytraCheck missed " +
 			            "its target. Conditional elytra check disabling may be " +
-			            "impossible for mods relying on this mixin.");
+			            "impossible for mods relying on this mixin.\n" +
+			            "You may report this bug in the \"Flight Core\" mod issue tracker");
 			logServerPlayNetHandler$shouldDisableElytraCheck = true;
 		}
 	}

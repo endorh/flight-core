@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Injects {@link PlayerEntityRotateEvent} on {@link PlayerEntity#rotateTowards}.<br>
+ * Injects {@link PlayerEntityRotateEvent} on {@link PlayerEntity#turn}.<br>
  * The mixin is applied to {@linkplain Entity} instead of
  * {@linkplain PlayerEntity} because the method is inherited from
  * {@linkplain Entity} in {@linkplain PlayerEntity}
@@ -26,7 +26,7 @@ public abstract class EntityMixin
 	private EntityMixin(Class<Entity> baseClass) { super(baseClass); }
 	
 	/**
-	 * Inject {@link PlayerEntityRotateEvent} on {@link PlayerEntity#rotateTowards}.<br>
+	 * Inject {@link PlayerEntityRotateEvent} on {@link PlayerEntity#turn}.<br>
 	 *
 	 * The event is cancellable. If cancelled, the rotateTowards method
 	 * call will be skipped.<br>
@@ -38,10 +38,10 @@ public abstract class EntityMixin
 	 * @param pitch Unscaled relative pitch rotation
 	 * @param callbackInfo Mixin {@linkplain CallbackInfo}
 	 *
-	 * @see PlayerEntity#rotateTowards(double, double)
-	 * @see MouseHelper#updatePlayerLook()
+	 * @see PlayerEntity#turn(double, double)
+	 * @see MouseHelper#turnPlayer()
 	 */
-	@Inject(method = "rotateTowards", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "turn", at = @At("HEAD"), cancellable = true)
 	public void _flightcore_rotateTowards(double yaw, double pitch, CallbackInfo callbackInfo) {
 		// noinspection ConstantConditions
 		if ((CapabilityProvider<Entity>)this instanceof PlayerEntity) {
