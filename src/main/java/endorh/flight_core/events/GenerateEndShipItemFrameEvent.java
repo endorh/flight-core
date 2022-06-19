@@ -1,15 +1,15 @@
 package endorh.flight_core.events;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.Event.HasResult;
-
-import java.util.Random;
 
 /**
  * Generated when an End Ship structure is creating its elytra item frame.<br>
@@ -33,12 +33,14 @@ import java.util.Random;
 @SuppressWarnings("unused")
 @Cancelable @HasResult
 public class GenerateEndShipItemFrameEvent extends Event {
-	/** Server world where the structure is loaded */
+	/** Accessor for the server level where the structure is loaded */
+	public final ServerLevelAccessor serverLevelAccessor;
+	/** Server level where the structure is loaded */
 	public final ServerLevel world;
 	/** Block position of the item frame */
 	public final BlockPos position;
-	/** Structure generation random generator */
-	public final Random random;
+	/** Structure generation random source */
+	public final RandomSource random;
 	/** Structure bounding box */
 	public final BoundingBox sbb;
 	/**
@@ -53,11 +55,12 @@ public class GenerateEndShipItemFrameEvent extends Event {
 	private ItemStack elytraStack;
 	
 	public GenerateEndShipItemFrameEvent(
-	  ServerLevel world, BlockPos pos, Random rand, BoundingBox sbb,
+	  ServerLevelAccessor levelAccessor, BlockPos pos, RandomSource rand, BoundingBox sbb,
 	  ItemFrame itemFrame, ItemStack elytraStack
 	) {
 		super();
-		this.world = world;
+		this.serverLevelAccessor = levelAccessor;
+		this.world = levelAccessor.getLevel();
 		this.position = pos;
 		this.random = rand;
 		this.sbb = sbb;

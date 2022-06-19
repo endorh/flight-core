@@ -6,16 +6,17 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.EndCityPieces;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
+import net.minecraft.world.level.levelgen.structure.structures.EndCityPieces;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,7 +43,7 @@ public abstract class EndCityPieces$EndCityPieceMixin extends TemplateStructureP
 	 * @throws IllegalAccessException always
 	 */
 	public EndCityPieces$EndCityPieceMixin(
-	  StructurePieceType type, CompoundTag tag, StructureManager manager,
+	  StructurePieceType type, CompoundTag tag, StructureTemplateManager manager,
 	  Function<ResourceLocation, StructurePlaceSettings> settingsSupplier
 	) throws IllegalAccessException {
 		super(type, tag, manager, settingsSupplier);
@@ -66,24 +67,23 @@ public abstract class EndCityPieces$EndCityPieceMixin extends TemplateStructureP
 	 *
 	 * @param marker Data marker
 	 * @param pos Block position of the marker
-	 * @param world Server world where the structure is loaded
+	 * @param levelAccessor Accessor for the server level where the structure is loaded
 	 * @param rand Generation {@link Random} object
 	 * @param sbb Structure bounding box
 	 * @param callbackInfo Mixin {@link CallbackInfo}
 	 */
 	@Inject(method = "handleDataMarker", at = @At("HEAD"), cancellable = true)
 	protected void _flightcore_handleDataMarker(
-	  String marker, BlockPos pos, ServerLevelAccessor world, Random rand,
-	  BoundingBox sbb, CallbackInfo callbackInfo
+	  String marker, BlockPos pos, ServerLevelAccessor levelAccessor,
+	  RandomSource rand, BoundingBox sbb, CallbackInfo callbackInfo
 	) {
 		if (marker.startsWith("Elytra")) {
-			ServerLevel serverWorld = world.getLevel();
 			ItemFrame itemFrame = new ItemFrame(
-			  serverWorld, pos, this.placeSettings.getRotation().rotate(Direction.SOUTH));
+			  levelAccessor.getLevel(), pos, placeSettings.getRotation().rotate(Direction.SOUTH));
 			ItemStack elytraStack = new ItemStack(Items.ELYTRA);
 			
 			GenerateEndShipItemFrameEvent event = new GenerateEndShipItemFrameEvent(
-			  serverWorld, pos, rand, sbb, itemFrame, elytraStack);
+			  levelAccessor, pos, rand, sbb, itemFrame, elytraStack);
 			MinecraftForge.EVENT_BUS.post(event);
 			
 			if (event.isCanceled()) {
@@ -91,7 +91,7 @@ public abstract class EndCityPieces$EndCityPieceMixin extends TemplateStructureP
 			} else if (event.getResult() == DENY) {
 				callbackInfo.cancel();
 				itemFrame.setItem(event.getElytraStack(), false);
-				world.addFreshEntity(itemFrame);
+				levelAccessor.addFreshEntity(itemFrame);
 			}
 		}
 	}
