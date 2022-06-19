@@ -10,10 +10,11 @@ import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.EndCityPieces;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,15 +37,15 @@ public abstract class EndCityPieces$EndCityPieceMixin extends TemplateStructureP
 	 * Dummy mixin constructor, required by the Java compiler to inherit from superclass.
 	 * @param type ignored
 	 * @param tag ignored
-	 * @param level ignored
+	 * @param manager ignored
 	 * @param settingsSupplier ignored
 	 * @throws IllegalAccessException always
 	 */
 	public EndCityPieces$EndCityPieceMixin(
-	  StructurePieceType type, CompoundTag tag, ServerLevel level,
+	  StructurePieceType type, CompoundTag tag, StructureManager manager,
 	  Function<ResourceLocation, StructurePlaceSettings> settingsSupplier
 	) throws IllegalAccessException {
-		super(type, tag, level, settingsSupplier);
+		super(type, tag, manager, settingsSupplier);
 		throw new IllegalAccessException("Mixin dummy constructor shouldn't be called!");
 	}
 	

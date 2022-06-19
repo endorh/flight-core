@@ -27,7 +27,7 @@ apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remappe
 // Mod info
 def mod_id = "flightcore"
 group = "endorh.flight_core"
-version = "0.1.2"
+version = "0.2.0"
 def group_slashed = project.group.replaceAll("\\.", "/"),
 	classname = "FlightCore",
 	maven_artifact = "${group}:${mod_id}:${version}"
@@ -53,8 +53,8 @@ def license = "LGPL"
 // Dependencies
 def mixin_version = "0.8.5",
 	minimal_mixin_version = "0.7.10",
-	mc_version = "1.17.1",
-	forge = "37.1.1",
+	mc_version = "1.18.2",
+	forge = "40.1.0",
 	forge_version = "${mc_version}-${forge}"
 // Testing
 def aerobatic_elytra_version = "1.16.5-0.1.0"
@@ -115,7 +115,7 @@ java {
 // Minecraft options
 minecraft {
 	// mappings channel: 'snapshot', version: '20201028-1.16.3'
-	mappings channel: 'official', version: '1.17.1'
+	mappings channel: 'official', version: '1.18.2'
 	// makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
 	runs {
