@@ -1,9 +1,9 @@
 package endorh.flight_core.mixins;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import endorh.flight_core.events.CancelCapeRenderEvent;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.CapeLayer;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,8 +26,8 @@ public class CapeLayerMixin {
 	 */
 	@Inject(at = @At("HEAD"), method = "render*", cancellable = true)
 	public void _flightcore_cancelRender(
-	  MatrixStack mStack, IRenderTypeBuffer buffer, int packedLight,
-	  AbstractClientPlayerEntity player, float limbSwing,
+	  PoseStack mStack, MultiBufferSource buffer, int packedLight,
+	  AbstractClientPlayer player, float limbSwing,
 	  float limbSwingAmount, float partialTicks, float ageInTicks,
 	  float netHeadYaw, float headPitch, CallbackInfo ci
 	) {

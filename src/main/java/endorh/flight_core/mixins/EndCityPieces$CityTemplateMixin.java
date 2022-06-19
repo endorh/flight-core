@@ -1,18 +1,21 @@
 package endorh.flight_core.mixins;
 
 import endorh.flight_core.events.GenerateEndShipItemFrameEvent;
-import net.minecraft.entity.item.ItemFrameEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.gen.feature.structure.EndCityPieces;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.decoration.ItemFrame;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.levelgen.feature.StructurePieceType;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.EndCityPieces;
+import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraftforge.common.MinecraftForge;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,23 +23,35 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
+import java.util.function.Function;
 
 import static net.minecraftforge.eventbus.api.Event.Result.DENY;
 
 /**
  * Injects {@link GenerateEndShipItemFrameEvent} on
- * {@link EndCityPieces.CityTemplate#handleDataMarker}.
+ * {@link EndCityPieces.EndCityPiece#handleDataMarker}.
  */
-@Mixin(EndCityPieces.CityTemplate.class)
-public abstract class EndCityPieces$CityTemplateMixin {
+@Mixin(EndCityPieces.EndCityPiece.class)
+public abstract class EndCityPieces$CityTemplateMixin extends TemplateStructurePiece {
 	/**
-	 * Shadow field containing the rotation of the end ship
+	 * Dummy mixin constructor, required by the Java compiler to inherit from superclass.
+	 * @param type ignored
+	 * @param tag ignored
+	 * @param level ignored
+	 * @param settingsSupplier ignored
+	 * @throws IllegalAccessException always
 	 */
-	@Shadow(aliases = "rotation") private @Final Rotation rotation;
+	public EndCityPieces$CityTemplateMixin(
+	  StructurePieceType type, CompoundTag tag, ServerLevel level,
+	  Function<ResourceLocation, StructurePlaceSettings> settingsSupplier
+	) throws IllegalAccessException {
+		super(type, tag, level, settingsSupplier);
+		throw new IllegalAccessException("Mixin dummy constructor shouldn't be called!");
+	}
 	
 	/**
 	 * Inject {@link GenerateEndShipItemFrameEvent} on
-	 * {@link EndCityPieces.CityTemplate#handleDataMarker}.<br>
+	 * {@link EndCityPieces.EndCityPiece#handleDataMarker}.<br>
 	 *
 	 * The event is cancellable. If cancelled, the default behaviour will
 	 * be prevented, but no item frame will be added to the world.<br>
@@ -58,13 +73,13 @@ public abstract class EndCityPieces$CityTemplateMixin {
 	 */
 	@Inject(method = "handleDataMarker", at = @At("HEAD"), cancellable = true)
 	protected void _flightcore_handleDataMarker(
-	  String marker, BlockPos pos, IServerWorld world, Random rand,
-	  MutableBoundingBox sbb, CallbackInfo callbackInfo
+	  String marker, BlockPos pos, ServerLevelAccessor world, Random rand,
+	  BoundingBox sbb, CallbackInfo callbackInfo
 	) {
 		if (marker.startsWith("Elytra")) {
-			ServerWorld serverWorld = world.getLevel();
-			ItemFrameEntity itemFrame = new ItemFrameEntity(
-			  serverWorld, pos, this.rotation.rotate(Direction.SOUTH));
+			ServerLevel serverWorld = world.getLevel();
+			ItemFrame itemFrame = new ItemFrame(
+			  serverWorld, pos, this.placeSettings.getRotation().rotate(Direction.SOUTH));
 			ItemStack elytraStack = new ItemStack(Items.ELYTRA);
 			
 			GenerateEndShipItemFrameEvent event = new GenerateEndShipItemFrameEvent(

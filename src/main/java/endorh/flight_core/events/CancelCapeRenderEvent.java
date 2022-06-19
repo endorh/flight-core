@@ -1,6 +1,6 @@
 package endorh.flight_core.events;
 
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
@@ -13,9 +13,9 @@ public class CancelCapeRenderEvent extends Event {
 	/**
 	 * Player being rendered
 	 */
-	public final AbstractClientPlayerEntity player;
+	public final AbstractClientPlayer player;
 	
-	public CancelCapeRenderEvent(AbstractClientPlayerEntity player) {
+	public CancelCapeRenderEvent(AbstractClientPlayer player) {
 		this.player = player;
 	}
 }

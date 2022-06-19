@@ -1,7 +1,7 @@
 package endorh.flight_core.events;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.client.CPlayerPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
 import net.minecraftforge.eventbus.api.Event;
 
 /**
@@ -15,11 +15,11 @@ public class DisableElytraCheckEvent extends Event {
 	/**
 	 * The player affected by the check
 	 */
-	public final ServerPlayerEntity player;
+	public final ServerPlayer player;
 	/**
 	 * The movement packet that triggered the check
 	 */
-	public final CPlayerPacket packet;
+	public final ServerboundMovePlayerPacket packet;
 	/**
 	 * The difference between the speed of the player and its actual movement<br>
 	 * This is what is actually checked.
@@ -33,7 +33,7 @@ public class DisableElytraCheckEvent extends Event {
 	private boolean disable = false;
 	
 	public DisableElytraCheckEvent(
-	  ServerPlayerEntity player, CPlayerPacket packet, double excess, int stackedPackets
+	  ServerPlayer player, ServerboundMovePlayerPacket packet, double excess, int stackedPackets
 	) {
 		this.player = player;
 		this.packet = packet;

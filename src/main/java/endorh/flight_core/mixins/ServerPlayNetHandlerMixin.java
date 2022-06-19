@@ -2,12 +2,12 @@ package endorh.flight_core.mixins;
 
 import endorh.flight_core.events.DisableElytraCheckEvent;
 import endorh.flight_core.logging.FailedMixinLogger;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.ServerPlayNetHandler;
-import net.minecraft.network.play.client.CPlayerPacket;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.GameRules.BooleanValue;
-import net.minecraft.world.GameRules.RuleKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.GameRules.BooleanValue;
+import net.minecraft.world.level.GameRules.Key;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -19,25 +19,25 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * {@link DisableElytraCheckEvent}, when the rules do not already disable
  * the check and a player is flying
  */
-@Mixin(ServerPlayNetHandler.class)
+@Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerPlayNetHandlerMixin {
 	
 	/**
 	 * The player being processed
 	 */
-	@Shadow(aliases = "player") public ServerPlayerEntity player;
+	@Shadow(aliases = "player") public ServerPlayer player;
 	
 	@Shadow(aliases = "firstGoodX") private double firstGoodX;
 	@Shadow(aliases = "firstGoodY") private double firstGoodY;
 	@Shadow(aliases = "firstGoodZ") private double firstGoodZ;
 	
-	@Shadow(aliases = "movePacketCounter") private int movePacketCounter;
-	@Shadow(aliases = "lastMovePacketCounter") private int lastMovePacketCounter;
+	@Shadow(aliases = "receivedMovePacketCount") private int receivedMovePacketCount;
+	@Shadow(aliases = "knownMovePacketCount") private int knownMovePacketCount;
 	
 	/**
 	 * Redirect the query for the game rule
 	 * {@link GameRules#RULE_DISABLE_ELYTRA_MOVEMENT_CHECK} when applying the
-	 * speed check at {@link ServerPlayNetHandler#handleMovePlayer} to
+	 * speed check at {@link ServerGamePacketListenerImpl#handleMovePlayer} to
 	 * the event {@link DisableElytraCheckEvent}.<br>
 	 *
 	 * The redirection only takes place if the check is not already disabled
@@ -55,12 +55,12 @@ public abstract class ServerPlayNetHandlerMixin {
 	  method = "handleMovePlayer",
 	  at = @At(
 	    value = "INVOKE",
-	    target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$RuleKey;)Z",
+	    target = "Lnet/minecraft/world/level/GameRules;getBoolean(Lnet/minecraft/world/level/GameRules$Key;)Z",
 	    ordinal = 0
 	  )
 	)
 	public boolean _flightcore_shouldDisableElytraCheck(
-	  GameRules rules, RuleKey<BooleanValue> key, CPlayerPacket packet
+	  GameRules rules, Key<BooleanValue> key, ServerboundMovePlayerPacket packet
 	) {
 		// If the key is not DISABLE_ELYTRA_MOVEMENT_CHECK, the mixin missed its target
 		if (key != GameRules.RULE_DISABLE_ELYTRA_MOVEMENT_CHECK) {
@@ -85,7 +85,7 @@ public abstract class ServerPlayNetHandlerMixin {
 		double playerMotion2 = player.getDeltaMovement().lengthSqr();
 		double playerDelta2 = dX * dX + dY * dY + dZ * dZ;
 		double excess = playerDelta2 - playerMotion2;
-		int stackedPackets = movePacketCounter - lastMovePacketCounter;
+		int stackedPackets = receivedMovePacketCount - knownMovePacketCount;
 		// Post the event
 		DisableElytraCheckEvent event = new DisableElytraCheckEvent(
 		  player, packet, excess, stackedPackets);

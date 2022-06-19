@@ -1,10 +1,10 @@
 package endorh.flight_core.events;
 
-import net.minecraft.entity.item.ItemFrameEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.decoration.ItemFrame;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.Event.HasResult;
@@ -34,18 +34,18 @@ import java.util.Random;
 @Cancelable @HasResult
 public class GenerateEndShipItemFrameEvent extends Event {
 	/** Server world where the structure is loaded */
-	public final ServerWorld world;
+	public final ServerLevel world;
 	/** Block position of the item frame */
 	public final BlockPos position;
 	/** Structure generation random generator */
 	public final Random random;
 	/** Structure bounding box */
-	public final MutableBoundingBox sbb;
+	public final BoundingBox sbb;
 	/**
 	 * Item frame that will be added if the event is not cancelled and
 	 * its result is {@code DENY}
 	 */
-	private final ItemFrameEntity itemFrame;
+	private final ItemFrame itemFrame;
 	/**
 	 * Item stack that will be added to the item frame if the
 	 * event is not cancelled and its result is {@code DENY}
@@ -53,8 +53,8 @@ public class GenerateEndShipItemFrameEvent extends Event {
 	private ItemStack elytraStack;
 	
 	public GenerateEndShipItemFrameEvent(
-	  ServerWorld world, BlockPos pos, Random rand, MutableBoundingBox sbb,
-	  ItemFrameEntity itemFrame, ItemStack elytraStack
+	  ServerLevel world, BlockPos pos, Random rand, BoundingBox sbb,
+	  ItemFrame itemFrame, ItemStack elytraStack
 	) {
 		super();
 		this.world = world;
@@ -69,7 +69,7 @@ public class GenerateEndShipItemFrameEvent extends Event {
 	 * @return The item frame that will be added if the event is
 	 * not cancelled and results in {@code DENY}
 	 */
-	public ItemFrameEntity getItemFrame() {
+	public ItemFrame getItemFrame() {
 		return itemFrame;
 	}
 	

@@ -1,14 +1,14 @@
 package endorh.flight_core.events;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
-import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.util.math.vector.Vector3f;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
-import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.model.PlayerModel;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.model.PlayerModel;
 
 import java.util.function.Consumer;
 
@@ -25,7 +25,7 @@ public class ApplyRotationsRenderPlayerEvent extends Event {
 	/**
 	 * Player being rendered
 	 */
-	public final AbstractClientPlayerEntity player;
+	public final AbstractClientPlayer player;
 	/**
 	 * Source of the event
 	 */
@@ -33,7 +33,7 @@ public class ApplyRotationsRenderPlayerEvent extends Event {
 	/**
 	 * Transformation matrix stack
 	 */
-	public final MatrixStack matrixStack;
+	public final PoseStack matrixStack;
 	/**
 	 * Age of player in ticks, containing the partial fraction.
 	 * Is equal to {@code player.ticksExisted + partialTicks}
@@ -51,15 +51,15 @@ public class ApplyRotationsRenderPlayerEvent extends Event {
 	public final float partialTicks;
 	/**
 	 * Consumer that may be used to call the super method,
-	 * {@link LivingRenderer#render}. The required 
+	 * {@link LivingEntityRenderer#render}. The required
 	 * {@linkplain Vector3f} should contain the 3 float arguments
 	 * of the call.
 	 */
 	public final Consumer<Vector3f> callSuper;
 	
 	public ApplyRotationsRenderPlayerEvent(
-	  PlayerRenderer renderer, AbstractClientPlayerEntity player,
-	  MatrixStack mStack, float ageInTicks, float rotationYaw,
+	  PlayerRenderer renderer, AbstractClientPlayer player,
+	  PoseStack mStack, float ageInTicks, float rotationYaw,
 	  float partialTicks, Consumer<Vector3f> callSuper
 	) {
 		super();

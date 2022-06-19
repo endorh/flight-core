@@ -1,7 +1,7 @@
 package endorh.flight_core.events;
 
-import net.minecraft.client.MouseHelper;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.MouseHandler;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
@@ -13,33 +13,33 @@ import net.minecraftforge.eventbus.api.Event;
  * The event is cancellable. If cancelled, the default rotation
  * behaviour won't take place.
  *
- * @see PlayerEntity#turn(double, double)
- * @see MouseHelper#turnPlayer()
+ * @see Player#turn(double, double)
+ * @see MouseHandler#turnPlayer()
  */
 @Cancelable
 public class PlayerEntityRotateEvent extends Event {
 	/**
 	 * Player associated to the event
 	 */
-	public final PlayerEntity player;
+	public final Player player;
 	/**
 	 * Accumulated mouse input on the x axis for this frame. Usually
 	 * scaled down multiplying by 0.15D
 	 *
-	 * @see PlayerEntity#turn(double, double)
-	 * @see MouseHelper#turnPlayer()
+	 * @see Player#turn(double, double)
+	 * @see MouseHandler#turnPlayer()
 	 */
 	public final double x;
 	/**
 	 * Accumulated mouse input on the y axis for this frame. Usually
 	 * scaled down multiplying by 0.15D
 	 *
-	 * @see PlayerEntity#turn(double, double)
-	 * @see MouseHelper#turnPlayer()
+	 * @see Player#turn(double, double)
+	 * @see MouseHandler#turnPlayer()
 	 */
 	public final double y;
 	
-	public PlayerEntityRotateEvent(PlayerEntity player, double x, double y) {
+	public PlayerEntityRotateEvent(Player player, double x, double y) {
 		super();
 		this.player = player;
 		this.x = x;

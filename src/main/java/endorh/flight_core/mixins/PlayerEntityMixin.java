@@ -1,11 +1,11 @@
 package endorh.flight_core.mixins;
 
 import endorh.flight_core.events.PlayerEntityTravelEvent;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,31 +13,36 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Injects {@link PlayerEntityTravelEvent} on {@link PlayerEntity#travel}
+ * Injects {@link PlayerEntityTravelEvent} on {@link Player#travel}
  */
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
 	/**
-	 * Irrelevant constructor required by the Java compiler
+	 * Dummy mixin constructor, required by the Java compiler to inherit from superclass.
+	 * @param type ignored
+	 * @param worldIn ignored
+	 * @throws IllegalAccessException always
 	 */
-	private PlayerEntityMixin(EntityType<? extends LivingEntity> type, World worldIn) {
+	private PlayerEntityMixin(EntityType<? extends LivingEntity> type, Level worldIn)
+	  throws IllegalAccessException {
 		super(type, worldIn);
+		throw new IllegalAccessException("Mixin dummy constructor shouldn't be called!");
 	}
 	
 	/**
-	 * Inject {@link PlayerEntityTravelEvent} on {@link PlayerEntity#travel}
+	 * Inject {@link PlayerEntityTravelEvent} on {@link Player#travel}
 	 * The event is cancellable. When cancelled, the travel method is skipped.
-	 * @param travelVector {@linkplain Vector3d}(moveStrafing, moveVertical, moveForward)
+	 * @param travelVector {@linkplain Vec3}(moveStrafing, moveVertical, moveForward)
 	 * @param callbackInfo Mixin {@linkplain CallbackInfo}
 	 *
-	 * @see PlayerEntity#travel(Vector3d)
+	 * @see Player#travel(Vec3)
 	 * @see LivingEntity#aiStep()
 	 */
 	@Inject(method = "travel", at = @At("HEAD"), cancellable = true)
-	public void _flightcore_travel(Vector3d travelVector, CallbackInfo callbackInfo) {
+	public void _flightcore_travel(Vec3 travelVector, CallbackInfo callbackInfo) {
 		//noinspection ConstantConditions
 		PlayerEntityTravelEvent event = new PlayerEntityTravelEvent(
-		  (PlayerEntity)(LivingEntity)this, travelVector);
+		  (Player)(LivingEntity)this, travelVector);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled()) callbackInfo.cancel();
 	}
