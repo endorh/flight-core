@@ -21,7 +21,7 @@ import java.util.function.Consumer;
  * {@linkplain Consumer} provided with the event.
  */
 @Cancelable
-public class ApplyRotationsRenderPlayerEvent extends Event {
+public class SetupRotationsRenderPlayerEvent extends Event {
 	/**
 	 * Player being rendered
 	 */
@@ -57,7 +57,7 @@ public class ApplyRotationsRenderPlayerEvent extends Event {
 	 */
 	public final Consumer<Vector3f> callSuper;
 	
-	public ApplyRotationsRenderPlayerEvent(
+	public SetupRotationsRenderPlayerEvent(
 	  PlayerRenderer renderer, AbstractClientPlayer player,
 	  PoseStack mStack, float ageInTicks, float rotationYaw,
 	  float partialTicks, Consumer<Vector3f> callSuper

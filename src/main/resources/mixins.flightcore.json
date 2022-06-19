@@ -6,12 +6,12 @@
     "target": "@env(DEFAULT)",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-        "PlayerEntityMixin",
+        "PlayerMixin",
         "EntityMixin",
         "PlayerRendererMixin",
-        "EndCityPieces\$CityTemplateMixin",
-        "ServerPlayNetHandlerMixin",
-        "RemoteClientPlayerEntityMixin",
+        "EndCityPieces\$EndCityPieceMixin",
+        "ServerGamePacketListenerMixin",
+        "RemotePlayerMixin",
         "CapeLayerMixin"
     ]
 }

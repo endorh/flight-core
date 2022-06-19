@@ -1,9 +1,8 @@
 package endorh.flight_core.mixins;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import endorh.flight_core.events.ApplyRotationsRenderPlayerEvent;
+import endorh.flight_core.events.SetupRotationsRenderPlayerEvent;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -15,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Injects {@link ApplyRotationsRenderPlayerEvent} on
+ * Injects {@link SetupRotationsRenderPlayerEvent} on
  * {@link PlayerRenderer#setupRotations}
  */
 @Mixin(PlayerRenderer.class)
@@ -36,7 +35,7 @@ public abstract class PlayerRendererMixin
 	}
 	
 	/**
-	 * Inject {@link ApplyRotationsRenderPlayerEvent} on
+	 * Inject {@link SetupRotationsRenderPlayerEvent} on
 	 * {@link PlayerRenderer#setupRotations}. The event is cancellable.
 	 * If cancelled, the {@code applyRotations} method call will be
 	 * skipped. The super method call can be invoked through the
@@ -55,8 +54,8 @@ public abstract class PlayerRendererMixin
 	  CallbackInfo callbackInfo
 	) {
 		//noinspection ConstantConditions
-		ApplyRotationsRenderPlayerEvent event =
-		  new ApplyRotationsRenderPlayerEvent(
+		SetupRotationsRenderPlayerEvent event =
+		  new SetupRotationsRenderPlayerEvent(
 		    (PlayerRenderer)(LivingEntityRenderer<AbstractClientPlayer,
 		    PlayerModel<AbstractClientPlayer>>)this,
 		    player, mStack, ageInTicks, rotationYaw, partialTicks,

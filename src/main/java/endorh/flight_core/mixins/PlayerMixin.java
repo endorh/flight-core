@@ -1,6 +1,6 @@
 package endorh.flight_core.mixins;
 
-import endorh.flight_core.events.PlayerEntityTravelEvent;
+import endorh.flight_core.events.PlayerTravelEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -13,24 +13,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Injects {@link PlayerEntityTravelEvent} on {@link Player#travel}
+ * Injects {@link PlayerTravelEvent} on {@link Player#travel}
  */
 @Mixin(Player.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerMixin extends LivingEntity {
 	/**
 	 * Dummy mixin constructor, required by the Java compiler to inherit from superclass.
 	 * @param type ignored
 	 * @param worldIn ignored
 	 * @throws IllegalAccessException always
 	 */
-	private PlayerEntityMixin(EntityType<? extends LivingEntity> type, Level worldIn)
+	private PlayerMixin(EntityType<? extends LivingEntity> type, Level worldIn)
 	  throws IllegalAccessException {
 		super(type, worldIn);
 		throw new IllegalAccessException("Mixin dummy constructor shouldn't be called!");
 	}
 	
 	/**
-	 * Inject {@link PlayerEntityTravelEvent} on {@link Player#travel}
+	 * Inject {@link PlayerTravelEvent} on {@link Player#travel}
 	 * The event is cancellable. When cancelled, the travel method is skipped.
 	 * @param travelVector {@linkplain Vec3}(moveStrafing, moveVertical, moveForward)
 	 * @param callbackInfo Mixin {@linkplain CallbackInfo}
@@ -41,7 +41,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	@Inject(method = "travel", at = @At("HEAD"), cancellable = true)
 	public void _flightcore_travel(Vec3 travelVector, CallbackInfo callbackInfo) {
 		//noinspection ConstantConditions
-		PlayerEntityTravelEvent event = new PlayerEntityTravelEvent(
+		PlayerTravelEvent event = new PlayerTravelEvent(
 		  (Player)(LivingEntity)this, travelVector);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.isCanceled()) callbackInfo.cancel();

@@ -17,7 +17,7 @@ import net.minecraftforge.eventbus.api.Event;
  * @see MouseHandler#turnPlayer()
  */
 @Cancelable
-public class PlayerEntityRotateEvent extends Event {
+public class PlayerTurnEvent extends Event {
 	/**
 	 * Player associated to the event
 	 */
@@ -39,7 +39,7 @@ public class PlayerEntityRotateEvent extends Event {
 	 */
 	public final double y;
 	
-	public PlayerEntityRotateEvent(Player player, double x, double y) {
+	public PlayerTurnEvent(Player player, double x, double y) {
 		super();
 		this.player = player;
 		this.x = x;

@@ -17,7 +17,7 @@ import net.minecraftforge.eventbus.api.Event;
  * @see Player#travel(Vec3)
  */
 @Cancelable
-public class PlayerEntityTravelEvent extends Event {
+public class PlayerTravelEvent extends Event {
 	/**
 	 * Player being ticked
 	 */
@@ -28,7 +28,7 @@ public class PlayerEntityTravelEvent extends Event {
 	 */
 	public final Vec3 travelVector;
 	
-	public PlayerEntityTravelEvent(Player player, Vec3 travelVector) {
+	public PlayerTravelEvent(Player player, Vec3 travelVector) {
 		this.player = player;
 		this.travelVector = travelVector;
 	}
@@ -36,7 +36,7 @@ public class PlayerEntityTravelEvent extends Event {
 	/**
 	 * Generates on every livingTick() of {@link RemotePlayer}s,
 	 * which do not call their {@link Player#travel} method
-	 * @see PlayerEntityTravelEvent
+	 * @see PlayerTravelEvent
 	 */
 	public static class RemotePlayerEntityTravelEvent extends Event {
 		/**

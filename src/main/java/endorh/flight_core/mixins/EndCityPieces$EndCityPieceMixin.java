@@ -17,7 +17,6 @@ import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -32,7 +31,7 @@ import static net.minecraftforge.eventbus.api.Event.Result.DENY;
  * {@link EndCityPieces.EndCityPiece#handleDataMarker}.
  */
 @Mixin(EndCityPieces.EndCityPiece.class)
-public abstract class EndCityPieces$CityTemplateMixin extends TemplateStructurePiece {
+public abstract class EndCityPieces$EndCityPieceMixin extends TemplateStructurePiece {
 	/**
 	 * Dummy mixin constructor, required by the Java compiler to inherit from superclass.
 	 * @param type ignored
@@ -41,7 +40,7 @@ public abstract class EndCityPieces$CityTemplateMixin extends TemplateStructureP
 	 * @param settingsSupplier ignored
 	 * @throws IllegalAccessException always
 	 */
-	public EndCityPieces$CityTemplateMixin(
+	public EndCityPieces$EndCityPieceMixin(
 	  StructurePieceType type, CompoundTag tag, ServerLevel level,
 	  Function<ResourceLocation, StructurePlaceSettings> settingsSupplier
 	) throws IllegalAccessException {

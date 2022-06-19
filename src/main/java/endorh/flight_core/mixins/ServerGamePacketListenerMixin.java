@@ -20,8 +20,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * the check and a player is flying
  */
 @Mixin(ServerGamePacketListenerImpl.class)
-public abstract class ServerPlayNetHandlerMixin {
-	
+public abstract class ServerGamePacketListenerMixin {
 	/**
 	 * The player being processed
 	 */
