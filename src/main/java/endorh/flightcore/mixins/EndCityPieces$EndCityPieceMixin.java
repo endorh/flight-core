@@ -1,6 +1,6 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.GenerateEndShipItemFrameEvent;
+import endorh.flightcore.events.GenerateEndShipItemFrameEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

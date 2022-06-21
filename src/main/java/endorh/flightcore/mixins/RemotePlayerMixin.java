@@ -1,7 +1,7 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
 import com.mojang.authlib.GameProfile;
-import endorh.flight_core.events.PlayerTravelEvent.RemotePlayerEntityTravelEvent;
+import endorh.flightcore.events.PlayerTravelEvent.RemotePlayerEntityTravelEvent;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.client.multiplayer.ClientLevel;

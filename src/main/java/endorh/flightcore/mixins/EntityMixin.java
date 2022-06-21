@@ -1,6 +1,6 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.PlayerTurnEvent;
+import endorh.flightcore.events.PlayerTurnEvent;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

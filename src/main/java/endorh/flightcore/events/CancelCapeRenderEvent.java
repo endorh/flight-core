@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraftforge.eventbus.api.Cancelable;

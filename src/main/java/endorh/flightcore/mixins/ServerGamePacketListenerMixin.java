@@ -1,7 +1,7 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.DisableElytraCheckEvent;
-import endorh.flight_core.logging.FailedMixinLogger;
+import endorh.flightcore.events.DisableElytraCheckEvent;
+import endorh.flightcore.logging.FailedMixinLogger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;

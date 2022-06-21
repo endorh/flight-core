@@ -18,7 +18,6 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
-apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 //apply plugin: 'maven-publish'
 
@@ -26,8 +25,8 @@ apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remappe
 
 // Mod info
 def mod_id = "flightcore"
-group = "endorh.flight_core"
-version = "0.1.2"
+group = "endorh.flightcore"
+version = "1.17.1-0.2.0"
 def group_slashed = project.group.replaceAll("\\.", "/"),
 	classname = "FlightCore",
 	maven_artifact = "${group}:${mod_id}:${version}"
