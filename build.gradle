@@ -26,7 +26,7 @@ apply plugin: 'org.spongepowered.mixin'
 // Mod info
 def mod_id = "flightcore"
 group = "endorh.flightcore"
-version = "1.17.1-0.2.0"
+version = "1.17.1-0.2.2"
 def group_slashed = project.group.replaceAll("\\.", "/"),
 	classname = "FlightCore",
 	maven_artifact = "${group}:${mod_id}:${version}"
@@ -96,7 +96,7 @@ def mod_properties = [
 ]
 
 // Java version
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 
 // Java options
