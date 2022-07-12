@@ -1,7 +1,7 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import endorh.flight_core.events.CancelCapeRenderEvent;
+import endorh.flightcore.events.CancelCapeRenderEvent;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.layers.CapeLayer;

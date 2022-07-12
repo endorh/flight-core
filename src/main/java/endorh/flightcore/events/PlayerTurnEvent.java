@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.client.MouseHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,7 +17,7 @@ import net.minecraftforge.eventbus.api.Event;
  * @see MouseHelper#updatePlayerLook()
  */
 @Cancelable
-public class PlayerEntityRotateEvent extends Event {
+public class PlayerTurnEvent extends Event {
 	/**
 	 * Player associated to the event
 	 */
@@ -39,7 +39,7 @@ public class PlayerEntityRotateEvent extends Event {
 	 */
 	public final double y;
 	
-	public PlayerEntityRotateEvent(PlayerEntity player, double x, double y) {
+	public PlayerTurnEvent(PlayerEntity player, double x, double y) {
 		super();
 		this.player = player;
 		this.x = x;

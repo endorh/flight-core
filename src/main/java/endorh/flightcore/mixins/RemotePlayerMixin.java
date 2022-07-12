@@ -1,7 +1,7 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
 import com.mojang.authlib.GameProfile;
-import endorh.flight_core.events.PlayerEntityTravelEvent.RemotePlayerEntityTravelEvent;
+import endorh.flightcore.events.PlayerTravelEvent.RemotePlayerEntityTravelEvent;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.RemoteClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -16,14 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * {@link RemoteClientPlayerEntity#livingTick}
  */
 @Mixin(RemoteClientPlayerEntity.class)
-public class RemoteClientPlayerEntityMixin extends AbstractClientPlayerEntity {
+public class RemotePlayerMixin extends AbstractClientPlayerEntity {
 	/**
 	 * Dummy constructor required by the Java compiler to inherit from superclass
 	 * @param world ignored
 	 * @param profile ignored
     * @throws IllegalAccessException always
 	 */
-	private RemoteClientPlayerEntityMixin(ClientWorld world, GameProfile profile) throws IllegalAccessException {
+	private RemotePlayerMixin(ClientWorld world, GameProfile profile) throws IllegalAccessException {
 		super(world, profile);
 		throw new IllegalAccessException("Mixin dummy constructor shouldn't be called");
 	}

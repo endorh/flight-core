@@ -1,7 +1,7 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.DisableElytraCheckEvent;
-import endorh.flight_core.logging.FailedMixinLogger;
+import endorh.flightcore.events.DisableElytraCheckEvent;
+import endorh.flightcore.logging.FailedMixinLogger;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.ServerPlayNetHandler;
 import net.minecraft.network.play.client.CPlayerPacket;
@@ -20,26 +20,20 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * the check and a player is flying
  */
 @Mixin(ServerPlayNetHandler.class)
-public abstract class ServerPlayNetHandlerMixin {
+public abstract class ServerGamePacketListenerMixin {
 	
 	/**
 	 * The player being processed
 	 */
-	@Shadow(aliases = "player")
-	public ServerPlayerEntity player;
+	@Shadow(aliases = "player") public ServerPlayerEntity player;
 	
-	@Shadow(aliases = "firstGoodX")
-	private double firstGoodX;
-	@Shadow(aliases = "firstGoodY")
-	private double firstGoodY;
-	@Shadow(aliases = "firstGoodZ")
-	private double firstGoodZ;
+	@Shadow(aliases = "firstGoodX") private double firstGoodX;
+	@Shadow(aliases = "firstGoodY") private double firstGoodY;
+	@Shadow(aliases = "firstGoodZ") private double firstGoodZ;
 	
-	@Shadow(aliases = "movePacketCounter")
-	private int movePacketCounter;
+	@Shadow(aliases = "movePacketCounter") private int movePacketCounter;
 	
-	@Shadow(aliases = "lastMovePacketCounter")
-	private int lastMovePacketCounter;
+	@Shadow(aliases = "lastMovePacketCounter") private int lastMovePacketCounter;
 	
 	/**
 	 * Redirect the query for the game rule

@@ -26,7 +26,7 @@ apply plugin: 'org.spongepowered.mixin'
 // Mod info
 def mod_id = "flightcore"
 group = "endorh.flight_core"
-version = "0.1.2"
+version = "1.16.5-0.2.1"
 def group_slashed = project.group.replaceAll("\\.", "/"),
 	classname = "FlightCore",
 	maven_artifact = "${group}:${mod_id}:${version}"
@@ -56,7 +56,7 @@ def mixin_version = "0.8.5",
 	forge = "36.1.0",
 	forge_version = "${mc_version}-${forge}"
 // Testing
-def aerobatic_elytra_version = "1.16.5-0.1.0"
+def aerobatic_elytra_version = "1.16.5-0.2.0"
 
 // Jar file name
 archivesBaseName = "${mod_id}-${mc_version}"

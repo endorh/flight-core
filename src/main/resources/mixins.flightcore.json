@@ -1,17 +1,17 @@
 {
     "required": true,
     "minVersion": "${minmixin}",
-    "package": "endorh.flight_core.mixins",
+    "package": "endorh.flightcore.mixins",
     "refmap": "mixins.${modid}.refmap.json",
     "target": "@env(DEFAULT)",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-        "PlayerEntityMixin",
-        "EntityMixin",
-        "PlayerRendererMixin",
-        "EndCityPieces\$CityTemplateMixin",
-        "ServerPlayNetHandlerMixin",
-        "RemoteClientPlayerEntityMixin",
-        "CapeLayerMixin"
+      "PlayerMixin",
+      "EntityMixin",
+      "PlayerRendererMixin",
+      "EndCityPieces\$EndCityPieceMixin",
+      "ServerGamePacketListenerMixin",
+      "RemotePlayerMixin",
+      "CapeLayerMixin"
     ]
 }

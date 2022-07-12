@@ -1,6 +1,6 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.GenerateEndShipItemFrameEvent;
+import endorh.flightcore.events.GenerateEndShipItemFrameEvent;
 import net.minecraft.entity.item.ItemFrameEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -28,12 +28,11 @@ import static net.minecraftforge.eventbus.api.Event.Result.DENY;
  * {@link EndCityPieces.CityTemplate#handleDataMarker}.
  */
 @Mixin(EndCityPieces.CityTemplate.class)
-public abstract class EndCityPieces$CityTemplateMixin {
+public abstract class EndCityPieces$EndCityPieceMixin {
 	/**
 	 * Shadow field containing the rotation of the end ship
 	 */
-	@Shadow(aliases = "rotation")
-	private @Final Rotation rotation;
+	@Shadow(aliases = "rotation") private @Final Rotation rotation;
 	
 	/**
 	 * Inject {@link GenerateEndShipItemFrameEvent} on

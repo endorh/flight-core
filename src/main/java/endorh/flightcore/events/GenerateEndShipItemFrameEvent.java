@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.entity.item.ItemFrameEntity;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.PlayerEntityRotateEvent;
+import endorh.flightcore.events.PlayerTurnEvent;
 import net.minecraft.client.MouseHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Injects {@link PlayerEntityRotateEvent} on {@link PlayerEntity#rotateTowards}.<br>
+ * Injects {@link PlayerTurnEvent} on {@link PlayerEntity#rotateTowards}.<br>
  * The mixin is applied to {@linkplain Entity} instead of
  * {@linkplain PlayerEntity} because the method is inherited from
  * {@linkplain Entity} in {@linkplain PlayerEntity}
@@ -26,7 +26,7 @@ public abstract class EntityMixin
 	private EntityMixin(Class<Entity> baseClass) { super(baseClass); }
 	
 	/**
-	 * Inject {@link PlayerEntityRotateEvent} on {@link PlayerEntity#rotateTowards}.<br>
+	 * Inject {@link PlayerTurnEvent} on {@link PlayerEntity#rotateTowards}.<br>
 	 *
 	 * The event is cancellable. If cancelled, the rotateTowards method
 	 * call will be skipped.<br>
@@ -45,7 +45,7 @@ public abstract class EntityMixin
 	public void _flightcore_rotateTowards(double yaw, double pitch, CallbackInfo callbackInfo) {
 		// noinspection ConstantConditions
 		if ((CapabilityProvider<Entity>)this instanceof PlayerEntity) {
-			PlayerEntityRotateEvent event = new PlayerEntityRotateEvent(
+			PlayerTurnEvent event = new PlayerTurnEvent(
 			  (PlayerEntity)(CapabilityProvider<Entity>)this, yaw, pitch);
 			MinecraftForge.EVENT_BUS.post(event);
 			if (event.isCanceled()) callbackInfo.cancel();

@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.client.CPlayerPacket;

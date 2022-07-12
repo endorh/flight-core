@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +16,7 @@ import net.minecraftforge.eventbus.api.Event;
  * @see PlayerEntity#travel(Vector3d)
  */
 @Cancelable
-public class PlayerEntityTravelEvent extends Event {
+public class PlayerTravelEvent extends Event {
 	/**
 	 * Player being ticked
 	 */
@@ -27,7 +27,7 @@ public class PlayerEntityTravelEvent extends Event {
 	 */
 	public final Vector3d travelVector;
 	
-	public PlayerEntityTravelEvent(PlayerEntity player, Vector3d travelVector) {
+	public PlayerTravelEvent(PlayerEntity player, Vector3d travelVector) {
 		this.player = player;
 		this.travelVector = travelVector;
 	}
@@ -36,7 +36,7 @@ public class PlayerEntityTravelEvent extends Event {
 	 * Generates on every livingTick() of
 	 * {@link net.minecraft.client.entity.player.RemoteClientPlayerEntity}s,
 	 * which do not call their {@link PlayerEntity#travel} method
-	 * @see PlayerEntityTravelEvent
+	 * @see PlayerTravelEvent
 	 */
 	public static class RemotePlayerEntityTravelEvent extends Event {
 		/**
