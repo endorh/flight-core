@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;

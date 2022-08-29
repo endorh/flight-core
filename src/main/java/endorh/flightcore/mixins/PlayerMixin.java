@@ -1,6 +1,6 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.PlayerTravelEvent;
+import endorh.flightcore.events.PlayerTravelEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

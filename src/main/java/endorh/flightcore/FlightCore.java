@@ -1,8 +1,8 @@
-package endorh.flight_core;
+package endorh.flightcore;
 
-import endorh.flight_core.events.PlayerTurnEvent;
-import endorh.flight_core.events.SetupRotationsRenderPlayerEvent;
-import endorh.flight_core.events.PlayerTravelEvent;
+import endorh.flightcore.events.PlayerTurnEvent;
+import endorh.flightcore.events.SetupRotationsRenderPlayerEvent;
+import endorh.flightcore.events.PlayerTravelEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**

@@ -1,4 +1,4 @@
-package endorh.flight_core.logging;
+package endorh.flightcore.logging;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,7 +1,7 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import endorh.flight_core.events.SetupRotationsRenderPlayerEvent;
+import endorh.flightcore.events.SetupRotationsRenderPlayerEvent;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;

@@ -1,11 +1,10 @@
-package endorh.flight_core.mixins;
+package endorh.flightcore.mixins;
 
-import endorh.flight_core.events.GenerateEndShipItemFrameEvent;
+import endorh.flightcore.events.GenerateEndShipItemFrameEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.item.ItemStack;
