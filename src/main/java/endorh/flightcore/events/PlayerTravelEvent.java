@@ -1,4 +1,4 @@
-package endorh.flight_core.events;
+package endorh.flightcore.events;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
