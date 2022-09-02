@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.model.PlayerModel;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * {@link PlayerRenderer#setupRotations}
  */
 @Mixin(PlayerRenderer.class)
+@OnlyIn(Dist.CLIENT)
 public abstract class PlayerRendererMixin
   extends LivingEntityRenderer<AbstractClientPlayer,
   PlayerModel<AbstractClientPlayer>> {

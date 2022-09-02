@@ -6,6 +6,8 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.entity.player.ProfilePublicKey;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * {@link RemotePlayer#aiStep()}
  */
 @Mixin(RemotePlayer.class)
+@OnlyIn(Dist.CLIENT)
 public class RemotePlayerMixin extends AbstractClientPlayer {
 	/**
 	 * Dummy mixin constructor, required by the Java compiler to inherit from superclass.

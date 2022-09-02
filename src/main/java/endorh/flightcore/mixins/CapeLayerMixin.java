@@ -5,6 +5,8 @@ import endorh.flightcore.events.CancelCapeRenderEvent;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.CapeLayer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * {@link CapeLayer#render}.
  */
 @Mixin(CapeLayer.class)
+@OnlyIn(Dist.CLIENT)
 public class CapeLayerMixin {
 	/**
 	 * Inject {@link CancelCapeRenderEvent} in {@link CapeLayer#render}.<br>
