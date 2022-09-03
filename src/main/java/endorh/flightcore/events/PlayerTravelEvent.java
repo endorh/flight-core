@@ -38,13 +38,13 @@ public class PlayerTravelEvent extends Event {
 	 * which do not call their {@link Player#travel} method
 	 * @see PlayerTravelEvent
 	 */
-	public static class RemotePlayerEntityTravelEvent extends Event {
+	public static class RemotePlayerTravelEvent extends Event {
 		/**
 		 * Player being ticked
 		 */
 		public final Player player;
 		
-		public RemotePlayerEntityTravelEvent(Player player) {
+		public RemotePlayerTravelEvent(Player player) {
 			this.player = player;
 		}
 	}

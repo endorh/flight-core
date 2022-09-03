@@ -29,7 +29,7 @@ plugins {
 // Mod info
 val modId = "flightcore"
 val modGroup = "endorh.flightcore"
-val modVersion = "0.5.1"
+val modVersion = "0.5.3"
 val mcVersion = "1.17.1"
 val forge = "37.1.1"
 val forgeVersion = "$mcVersion-$forge"
@@ -131,10 +131,13 @@ minecraft {
 	runs {
 		val client = create("client") {
 			workingDirectory(file("run"))
-			arg("-mixin.config=mixins.$modId.json")
 			
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
+			
+			jvmArg("-XX:+AllowEnhancedClassRedefinition")
+			
+			arg("-mixin.config=mixins.$modId.json")
 			
 			mods {
 				create(modId) {
@@ -145,10 +148,14 @@ minecraft {
 
 		create("server") {
 			workingDirectory(file("run"))
-			arg("-mixin.config=mixins.$modId.json")
 			
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
+			
+			jvmArg("-XX:+AllowEnhancedClassRedefinition")
+			
+			arg("-mixin.config=mixins.$modId.json")
+			arg("nogui")
 
 			mods {
 				create(modId) {
