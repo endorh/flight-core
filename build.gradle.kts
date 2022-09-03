@@ -135,6 +135,8 @@ minecraft {
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
 			
+			jvmArg("-XX:+AllowEnhancedClassRedefinition")
+			
 			arg("-mixin.config=mixins.$modId.json")
 			
 			mods {
@@ -149,6 +151,8 @@ minecraft {
 			
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
+			
+			jvmArg("-XX:+AllowEnhancedClassRedefinition")
 			
 			arg("-mixin.config=mixins.$modId.json")
 			arg("nogui")
