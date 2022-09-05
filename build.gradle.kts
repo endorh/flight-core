@@ -29,6 +29,7 @@ plugins {
 // Mod info
 val modId = "flightcore"
 val modGroup = "endorh.flightcore"
+val githubRepo = "endorh/flightcore"
 val modVersion = "0.5.1"
 val mcVersion = "1.16.5"
 val forge = "36.1.0"
@@ -274,6 +275,14 @@ artifacts {
 
 publishing {
 	repositories {
+		maven("https://maven.pkg.github.com/$githubRepo") {
+			name = "GitHubPackages"
+			credentials {
+				username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+				password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+			}
+		}
+		
 		maven(rootProject.projectDir.parentFile.resolve("maven")) {
 			name = "LocalMods"
 		}
