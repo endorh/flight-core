@@ -1,5 +1,5 @@
 # Flight Core
-This core mod adds three cancellable events to allow mods to tweak the way the player moves and rotates
+This core mod adds two cancellable events to allow mods to tweak the way the player moves and rotates
  
  - `PlayerTravelEvent` - Fired when the player's position is updated
  - `PlayerTurnEvent` - Fired when the player turns its view around
