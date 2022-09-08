@@ -52,9 +52,9 @@ val displayName = "Flight Core"
 val vendor = "Endor H"
 val credits = "xXJiazeXx"
 val authors = "Endor H"
-val issueTracker = ""
-val page = ""
-val updateJson = ""
+val issueTracker = "https://github.com/endorh/flightcore/issues"
+val page = "https://www.curseforge.com/minecraft/mc-mods/flightcore"
+val updateJson = "https://github.com/endorh/flightcore/raw/updates/updates.json"
 val logoFile = "$modId.png"
 val modDescription = """
 	Generates events that allow mods to alter the way a player moves and rotates
@@ -173,10 +173,10 @@ minecraft {
 }
 
 dependencies {
-	"minecraft"("net.minecraftforge:forge:$forgeVersion")
+	minecraft("net.minecraftforge:forge:$forgeVersion")
 
 	implementation("org.spongepowered:mixin:$mixinVersion")
-	"annotationProcessor"("org.spongepowered:mixin:$mixinVersion:processor")
+	annotationProcessor("org.spongepowered:mixin:$mixinVersion:processor")
 }
 
 // Tasks --------------------------------------------------------------------------
