@@ -29,7 +29,7 @@ plugins {
 // Mod info
 val modId = "flightcore"
 val modGroup = "endorh.flightcore"
-val githubRepo = "endorh/flightcore"
+val githubRepo = "endorh/flight-core"
 val modVersion = "0.5.5"
 val mcVersion = "1.19.2"
 val forge = "43.1.1"
@@ -52,9 +52,9 @@ val displayName = "Flight Core"
 val vendor = "Endor H"
 val credits = "xXJiazeXx"
 val authors = "Endor H"
-val issueTracker = "https://github.com/endorh/flightcore/issues"
+val issueTracker = "https://github.com/$githubRepo/issues"
 val page = "https://www.curseforge.com/minecraft/mc-mods/flightcore"
-val updateJson = "https://github.com/endorh/flightcore/raw/updates/updates.json"
+val updateJson = "https://github.com/$githubRepo/raw/updates/updates.json"
 val logoFile = "$modId.png"
 val modDescription = """
 	Generates events that allow mods to alter the way a player moves and rotates
@@ -136,6 +136,7 @@ minecraft {
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
 			
+			// JetBrains Runtime HotSwap (run with vanilla JBR 17 without fast-debug, see CONTRIBUTING.md)
 			jvmArg("-XX:+AllowEnhancedClassRedefinition")
 			
 			arg("-mixin.config=mixins.$modId.json")
@@ -153,6 +154,7 @@ minecraft {
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
 			
+			// JetBrains Runtime HotSwap (run with vanilla JBR 17 without fast-debug, see CONTRIBUTING.md)
 			jvmArg("-XX:+AllowEnhancedClassRedefinition")
 			
 			arg("-mixin.config=mixins.$modId.json")
