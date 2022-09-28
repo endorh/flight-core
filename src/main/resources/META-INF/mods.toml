@@ -3,15 +3,15 @@ loaderVersion="[35,)"
 license="${license}"
 issueTrackerURL="${issue_tracker}"
 [[mods]]
-	modId="flightcore"
-	version="${version}"
-	displayName="${display}"
-	updateJSONURL="${update_json}"
-	displayURL="${page}"
-	logoFile="${logo_file}"
-	credits="${credits}"
-	authors="${authors}"
-	description='''${description}'''
+    modId="flightcore"
+    version="${version}"
+    displayName="${display}"
+    updateJSONURL="${update_json}"
+    displayURL="${page}"
+    logoFile="${logo_file}"
+    credits="${credits}"
+    authors="${authors}"
+    description='''${description}'''
 [[dependencies.flightcore]]
     modId="forge"
     mandatory=true

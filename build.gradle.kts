@@ -30,7 +30,7 @@ plugins {
 val modId = "flightcore"
 val modGroup = "endorh.flightcore"
 val githubRepo = "endorh/flight-core"
-val modVersion = "0.5.1"
+val modVersion = "1.0.0"
 val mcVersion = "1.16.5"
 val forge = "36.1.0"
 val forgeVersion = "$mcVersion-$forge"
