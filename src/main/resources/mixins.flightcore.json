@@ -8,9 +8,11 @@
     "mixins": [
       "PlayerMixin",
       "EntityMixin",
-      "PlayerRendererMixin",
       "EndCityPieces\$EndCityPieceMixin",
-      "ServerGamePacketListenerMixin",
+      "ServerGamePacketListenerMixin"
+    ],
+    "client": [
+      "PlayerRendererMixin",
       "RemotePlayerMixin",
       "CapeLayerMixin"
     ]
