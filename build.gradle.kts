@@ -2,24 +2,10 @@ import net.minecraftforge.gradle.userdev.tasks.RenameJarInPlace
 import java.text.SimpleDateFormat
 import java.util.*
 
-buildscript {
-	repositories {
-		maven("https://files.minecraftforge.net/maven")
-		maven("https://repo.spongepowered.org/maven")
-		mavenCentral()
-	}
-	dependencies {
-		classpath("net.minecraftforge.gradle:ForgeGradle:5.1.+") {
-			isChanging = true
-		}
-		classpath("org.spongepowered:mixingradle:0.7-SNAPSHOT")
-	}
-}
-
 // Build script plugins
 plugins {
 	java
-	id("net.minecraftforge.gradle")
+	id("net.neoforged.gradle") version "6.0.18+"
 	id("org.spongepowered.mixin")
 	`maven-publish`
 }
@@ -32,8 +18,8 @@ val modGroup = "endorh.flightcore"
 val githubRepo = "endorh/flight-core"
 object V {
 	val mod = "1.0.0"
-	val minecraft = "1.19.4"
-	val forge = "45.1.19"
+	val minecraft = "1.20.1"
+	val forge = "47.1.79"
 	val minecraftForge = "$minecraft-$forge"
 
 	object mappings {
@@ -180,8 +166,14 @@ minecraft {
 	}
 }
 
+repositories {
+	maven("https://maven.neoforged.net/releases/") {
+		name = "NeoForged"
+	}
+}
+
 dependencies {
-	minecraft("net.minecraftforge:forge:${V.minecraftForge}")
+	minecraft("net.neoforged:forge:${V.minecraftForge}")
 
 	implementation("org.spongepowered:mixin:${V.mixin}")
 	annotationProcessor("org.spongepowered:mixin:${V.mixin}:processor")
