@@ -30,22 +30,28 @@ plugins {
 val modId = "flightcore"
 val modGroup = "endorh.flightcore"
 val githubRepo = "endorh/flight-core"
-val modVersion = "1.0.0"
-val mcVersion = "1.19.2"
-val forge = "43.1.1"
-val forgeVersion = "$mcVersion-$forge"
-val mappingsChannel = "official"
-val mappingsVersion = "1.19.2"
-val mixinVersion = "0.8.5"
-val minimalMixinVersion = "0.7.10"
+object V {
+	val mod = "1.0.0"
+	val minecraft = "1.19.4"
+	val forge = "45.1.19"
+	val minecraftForge = "$minecraft-$forge"
+
+	object mappings {
+		val channel = "official"
+		val version = minecraft
+	}
+
+	val mixin = "0.8.5"
+	val minimalMixin = "0.7.10"
+}
 
 group = modGroup
-version = modVersion
+version = V.mod
 
 val groupSlashed = modGroup.replace(".", "/")
 val className = "FlightCore"
-val modArtifactId = "$modId-$mcVersion"
-val modMavenArtifact = "$modGroup:$modArtifactId:$modVersion"
+val modArtifactId = "$modId-${V.minecraft}"
+val modMavenArtifact = "$modGroup:$modArtifactId:${V.mod}"
 
 // Attributes
 val displayName = "Flight Core"
@@ -83,9 +89,9 @@ val modProperties = mapOf(
 	"modid"         to modId,
 	"display"       to displayName,
 	"version"       to project.version,
-	"mcversion"     to mcVersion,
-	"mixinver"      to mixinVersion,
-	"minmixin"      to minimalMixinVersion,
+	"mcversion"     to V.minecraft,
+	"mixinver"      to V.mixin,
+	"minmixin"      to V.minimalMixin,
 	"vendor"        to vendor,
 	"authors"       to authors,
 	"credits"       to credits,
@@ -127,7 +133,7 @@ println(
 // Minecraft options -----------------------------------------------------------
 
 minecraft {
-	mappings(mappingsChannel, mappingsVersion)
+	mappings(V.mappings.channel, V.mappings.version)
 
 	runs {
 		val client = create("client") {
@@ -175,10 +181,10 @@ minecraft {
 }
 
 dependencies {
-	minecraft("net.minecraftforge:forge:$forgeVersion")
+	minecraft("net.minecraftforge:forge:${V.minecraftForge}")
 
-	implementation("org.spongepowered:mixin:$mixinVersion")
-	annotationProcessor("org.spongepowered:mixin:$mixinVersion:processor")
+	implementation("org.spongepowered:mixin:${V.mixin}")
+	annotationProcessor("org.spongepowered:mixin:${V.mixin}:processor")
 }
 
 // Tasks --------------------------------------------------------------------------
@@ -300,7 +306,7 @@ publishing {
 	publications {
 		register<MavenPublication>("mod") {
 			artifactId = modArtifactId
-			version = modVersion
+			version = V.mod
 			
 			artifact(tasks.jar.get())
 			artifact(sourcesJarTask)
