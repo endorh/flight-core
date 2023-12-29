@@ -5,9 +5,10 @@ import java.util.*
 // Build script plugins
 plugins {
 	java
+	`maven-publish`
+
 	id("net.neoforged.gradle") version "6.0.18+"
 	id("org.spongepowered.mixin")
-	`maven-publish`
 }
 
 // --------------------------------------------------------------------------------
@@ -74,7 +75,7 @@ val jarAttributes = mapOf(
 val modProperties = mapOf(
 	"modid"         to modId,
 	"display"       to displayName,
-	"version"       to project.version,
+	"version"       to V.mod,
 	"mcversion"     to V.minecraft,
 	"mixinver"      to V.mixin,
 	"minmixin"      to V.minimalMixin,
@@ -111,10 +112,17 @@ tasks.withType<JavaCompile> {
 	options.encoding = "UTF-8"
 }
 
-println(
-	"Java: " + System.getProperty("java.version")
-	+ " JVM: " + System.getProperty("java.vm.version") + "(" + System.getProperty("java.vendor")
-	+ ") Arch: " + System.getProperty("os.arch"))
+fun sysProp(name: String) = System.getProperty(name) ?: null
+
+// JetBrains Runtime HotSwap (run with vanilla JBR 17 without fast-debug, see CONTRIBUTING.md)
+val jvmSupportsEnhancedClassRedefinition = sysProp("java.vendor")?.contains("JetBrains") == true
+
+println("Java: ${sysProp("java.version")}")
+println("JVM: \"${sysProp("java.vm.name")}\" ${sysProp("java.vm.version")} (${sysProp("java.vendor")})")
+
+println("Mod: \"$displayName\" ($modId)")
+println("Version: ${V.minecraft}-${V.mod} (Forge: ${V.forge})")
+println("Mappings: ${V.mappings.channel} ${V.mappings.version}")
 
 // Minecraft options -----------------------------------------------------------
 
@@ -128,8 +136,8 @@ minecraft {
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
 			
-			// JetBrains Runtime HotSwap (run with vanilla JBR 17 without fast-debug, see CONTRIBUTING.md)
-			jvmArg("-XX:+AllowEnhancedClassRedefinition")
+			if (jvmSupportsEnhancedClassRedefinition)
+				jvmArg("-XX:+AllowEnhancedClassRedefinition")
 			
 			arg("-mixin.config=mixins.$modId.json")
 			
@@ -145,9 +153,9 @@ minecraft {
 			
 			property("forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP")
 			property("forge.logging.console.level", "debug")
-			
-			// JetBrains Runtime HotSwap (run with vanilla JBR 17 without fast-debug, see CONTRIBUTING.md)
-			jvmArg("-XX:+AllowEnhancedClassRedefinition")
+
+			if (jvmSupportsEnhancedClassRedefinition)
+				jvmArg("-XX:+AllowEnhancedClassRedefinition")
 			
 			arg("-mixin.config=mixins.$modId.json")
 			arg("nogui")
