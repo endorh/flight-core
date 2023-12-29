@@ -1,4 +1,9 @@
 # Flight Core
+> [!IMPORTANT]
+> Since Minecraft 1.20 this mod has been merged with
+> [`LazuLib`](https://github.com/endorh/lazulib)
+> and is no longer available as a separate mod.
+
 This core mod adds two cancellable events to allow mods to tweak the way the player moves and rotates
  
  - `PlayerTravelEvent` - Fired when the player's position is updated
